@@ -20,11 +20,14 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import org.msgpack.MessagePack;
+
+import java.util.List;
 
 /**
  * @author lilinfeng
- * @date 2014年2月14日
  * @version 1.0
+ * @date 2014年2月14日
  */
 @Sharable
 public class EchoServerHandler extends ChannelHandlerAdapter {
@@ -33,18 +36,27 @@ public class EchoServerHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
-	    throws Exception {
-	String body = (String) msg;
-	System.out.println("This is " + ++counter + " times receive client : ["
-		+ body + "]");
-	body += "$_";
-	ByteBuf echo = Unpooled.copiedBuffer(body.getBytes());
-	ctx.writeAndFlush(echo);
+            throws Exception {
+        try {
+            //直接输出msg
+            System.out.println(msg.toString());
+            String remsg = new String("finally receive");
+            //回复has receive 给客户端
+            ctx.write(remsg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+        }
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-	cause.printStackTrace();
-	ctx.close();// 发生异常，关闭链路
+        cause.printStackTrace();
+        ctx.close();// 发生异常，关闭链路
     }
 }
