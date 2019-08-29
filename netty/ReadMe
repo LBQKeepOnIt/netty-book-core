@@ -1,0 +1,5 @@
+
+#执行的命令
+
+E:\myWorkspace\third-project\nettybook2>protoc --java_out=.\src .\netty\Subscrib
+eReq.proto
