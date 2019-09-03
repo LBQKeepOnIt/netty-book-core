@@ -8,12 +8,12 @@ Ant build file for JiBX data binding code to schema starter example.
 <project basedir="." default="help">
   <available file="/lib/jibx-bind.jar" property="jibx-home" value=""/>
   <property environment="env"/>
-  <condition property="jibx-home" value="${env.JIBX_HOME}">
+  <condition property="jibx-home" value="D:/work/jibx/">
     <and>
       <not>
         <isset property="jibx-home"/>
       </not>
-      <available file="${env.JIBX_HOME}/lib"/>
+      <available file="D:/work/jibx/lib"/>
     </and>
   </condition>
   <!-- End of jibx-home location setting block. -->
@@ -39,7 +39,7 @@ Ant build file for JiBX data binding code to schema starter example.
   
   <!-- make sure runtime jars are present -->
   <target name="check-runtime">
-  	<echo message="-------------->${env.JIBX_HOME}"></echo>
+  	<echo message="-------------->D:/work/jibx/"></echo>
     <fail unless="jibx-home">JiBX home directory not found - define JIBX_HOME system property or set path directly in build.xml file.</fail>
     <fail unless="runtime-jars-found">Required JiBX runtime jar jibx-run.jar was not found in JiBX home lib directory (${jibx-home}/lib)</fail>
   </target>
