@@ -66,7 +66,7 @@ public class LoginAuthReqHandler extends ChannelHandlerAdapter {
                 // 握手失败，关闭连接
                 ctx.close();
             } else {
-                LOG.info("Login is ok : " + message);
+                System.out.println("Login is ok : " + message);
                 ctx.fireChannelRead(msg);
             }
         } else

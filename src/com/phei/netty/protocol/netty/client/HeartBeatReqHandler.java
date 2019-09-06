@@ -68,7 +68,7 @@ public class HeartBeatReqHandler extends ChannelHandlerAdapter {
         @Override
         public void run() {
             NettyMessage heatBeat = buildHeatBeat();
-            LOG.info("Client send heart beat messsage to server : ---> "
+            System.out.println("Client send heart beat messsage to server : ---> "
                             + heatBeat);
             ctx.writeAndFlush(heatBeat);
         }
